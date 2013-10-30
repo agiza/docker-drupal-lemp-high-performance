@@ -18,7 +18,7 @@ RUN apt-get update
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -s /bin/true /sbin/initctl
 
 RUN echo "mysql-server mysql-server/root_password password $MYSQLTMPROOT" | debconf-set-selections && echo "mysql-server mysql-server/root_password_again password $MYSQLTMPROOT" | debconf-set-selections && apt-get install -y mariadb-server
-RUN apt-get -y install nginx php5-fpm php5-mysql php-pear php5-imagick php5-imap php5-mcrypt php5-curl php5-memcached php5-cli php5-dev php5-json php5-gd  mysqltuner varnish libmemcached6 memcached && apt-get -y install nginx-extras
+RUN apt-get -y install nginx php5-fpm php5-mysql php-pear php5-imagick php5-imap php5-memcache php5-mcrypt php5-curl php5-memcached php5-cli php5-dev php5-json php5-gd  mysqltuner varnish libmemcached6 memcached && apt-get -y install nginx-extras
 
 #mysql config
 RUN cat /proc/mounts > /etc/mtab && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
